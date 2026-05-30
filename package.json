@@ -1,0 +1,19 @@
+{
+  "name": "fsc-website",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "scrape": "tsx scripts/scrape-articles.ts"
+  },
+  "dependencies": {
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0",
+    "tsx": "^4.22.3",
+    "typescript": "^6.0.3"
+  }
+}

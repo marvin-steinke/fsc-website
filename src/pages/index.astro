@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import articlesBfb from '../data/articles_bfb.json';
+import articlesDfb from '../data/articles_dfb.json';
+
+interface Article {
+  title: string;
+  url: string;
+  date: string;
+}
+
+const bfb = articlesBfb as Article[];
+const dfb = articlesDfb as Article[];
+---
+
+<Layout title="FSC Berlin e.V.">
+  <div class="img-shadow">
+    <img
+      src="/resources/index0.jpg"
+      class="img-greet"
+      alt="Fechtsport Club Berlin – Trainingsbetrieb"
+    />
+  </div>
+
+  <div class="container section">
+    <div class="content-narrow">
+      <h1>Fechtsport Club Berlin e.V.</h1>
+      <p>
+        Wir bieten Interessierten ab 7&nbsp;Jahren die Möglichkeit, diese aufregende und
+        schöne Sportart unter qualifizierter Anleitung zu erlernen. Daneben gibt es im
+        FSC&nbsp;e.V. ein buntes Vereinsleben mit Turnieren, Trainingslagern und
+        Vereinsfesten.
+      </p>
+    </div>
+  </div>
+
+  <hr class="container" />
+
+  <div class="container section">
+    <div class="news-grid">
+      <!-- BFB News -->
+      <div>
+        <div class="news-header">
+          <h3>Berliner Fechterbund</h3>
+          <img
+            src="/resources/logo_bfb.gif"
+            class="logo-xfb"
+            alt="Berliner Fechterbund Logo"
+          />
+        </div>
+        <table class="table" aria-label="Neuigkeiten des Berliner Fechterbunds">
+          <tbody>
+            {bfb.length > 0
+              ? bfb.map((a) => (
+                  <tr>
+                    <td class="date">{a.date}</td>
+                    <td><a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a></td>
+                  </tr>
+                ))
+              : (
+                  <tr class="empty">
+                    <td colspan="2">Keine aktuellen Meldungen.</td>
+                  </tr>
+                )
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DFB News -->
+      <div>
+        <div class="news-header">
+          <h3>Deutscher Fechterbund</h3>
+          <img
+            src="/resources/logo_dfb.gif"
+            class="logo-xfb"
+            alt="Deutscher Fechterbund Logo"
+          />
+        </div>
+        <table class="table" aria-label="Neuigkeiten des Deutschen Fechterbunds">
+          <tbody>
+            {dfb.length > 0
+              ? dfb.map((a) => (
+                  <tr>
+                    <td class="date">{a.date}</td>
+                    <td><a href={a.url} target="_blank" rel="noopener noreferrer">{a.title}</a></td>
+                  </tr>
+                ))
+              : (
+                  <tr class="empty">
+                    <td colspan="2">Keine aktuellen Meldungen.</td>
+                  </tr>
+                )
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="img-shadow">
+    <img
+      src="/resources/index1.jpg"
+      class="img-greet"
+      alt="Fechtsport Club Berlin – Vereinsleben"
+    />
+  </div>
+</Layout>

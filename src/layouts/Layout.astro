@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const isDecember = new Date().getMonth() === 11;
+const logo = isDecember ? '/resources/wappenXMAS.gif' : '/resources/wappen.gif';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string): boolean =>
+  href === '/' ? pathname === '/' || pathname === '' : pathname.startsWith(href);
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#001223" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div class="nav-inner">
+          <input type="checkbox" id="nav-check" class="nav-check" />
+
+          <div class="nav-brand">
+            <a href="/" aria-label="Startseite">
+              <img src={logo} id="logo" alt="FSC Berlin e.V. Logo" />
+            </a>
+            <span class="club-name">FSC Berlin e.V.</span>
+          </div>
+
+          <label for="nav-check" class="nav-toggle" aria-label="Navigation öffnen">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+
+          <nav aria-label="Hauptnavigation">
+            <ul class="nav-list">
+              <li>
+                <a href="/" class:list={['nav-link', { active: isActive('/') }]}>Start</a>
+              </li>
+              <li>
+                <a
+                  href="/training"
+                  class:list={['nav-link', { active: isActive('/training') }]}
+                >Training</a>
+              </li>
+              <li>
+                <a
+                  href="/mitgliedschaft"
+                  class:list={['nav-link', { active: isActive('/mitgliedschaft') }]}
+                >Mitgliedschaft</a>
+              </li>
+              <li>
+                <a
+                  class="nav-link"
+                  href="https://fencing.ophardt.online/de/widget/calendar/ger/MV?add-region[]=SN&add-region[]=ST&add-region[]=TH&add-region[]=BR&add-region[]=BE&group[]=RC&group[]=RT&group[]=TT&days=365"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Turniere</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <div class="container section-s">
+      <hr />
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-links">
+          <a href="/kontakt">Kontakt</a> |
+          <a href="/impressum">Impressum</a> |
+          <a href="/datenschutzundhaftung">Datenschutz &amp; Haftung</a>
+        </p>
+        <p class="footer-copyright">
+          <a href="/copyright">
+            &copy; {new Date().getFullYear()} Fechtsport Club Berlin e.V. Alle Rechte vorbehalten
+          </a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
